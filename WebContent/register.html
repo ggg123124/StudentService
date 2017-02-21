@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>DiQuick</title>
+<meta name="keywords" content="Keywords">
+<meta name="description" content="Description"> 
+
+<link rel="stylesheet" href="css/diquick.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+
+</head>
+<style>
+
+body {background-color:#f1f4f5;}
+form {color:#333;}
+
+/*--button--*/
+.btn {background-color:#3f51b5;color:#fff;}
+.btn:hover {color:#fff;}
+
+/*--login--*/
+.login {overflow:hidden;margin:8% auto 0 auto;max-width:450px;border-radius:.5rem;box-shadow:0 5px 25px 0 rgba(0, 0, 0, 0.16);}
+.login>.title {padding:1.5rem 0;background-color:#3f51b5;color:#fff;text-align:center;font-size:1.75rem;}
+.login>.content {padding:2rem;background-color:#fff;}
+
+</style>
+
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+
+    <!-- main begin -->
+    <div class="main"> 
+        <!-- login begin -->
+		<div class="animated-fadein right"></div>
+        <div class="login">
+            <div class="title">注册您的账号</div>
+            <div class="content">
+                <form action="Test.jsp" method="post" id="form2Id">
+					<ul class="form ratio100"> 
+						<li><span>姓名*</span><div><input type="text" placeholder="输入您的姓名" name = "user_name" id = "nameId"></div></li>
+						<li><span>学号*</span><div><input type="text" placeholder="输入您的学号" name = "user_number" id = "numberId"></div></li>
+						<li><span>密码* 密码请不要使用标点符号</span><div><input type="password" placeholder="输入您的密码" name = "user_pass" id = "passId"></div></li>
+						<li><span>重复密码*</span><div><input type="password" placeholder="再次输入您的密码" name = "user_pass_aga" id = "passAgaId"></div></li>
+						<li><span>邮箱*</span><div><input type="text" placeholder="输入您的邮箱" name = "user_mail" id = "mailId"></div></li>
+						<li><span>手机号*</span><div><input type="text" placeholder="输入您的手机号" name = "user_phone_number" id = "phoneId"></div></li>
+						<li class="tc"><button type="button" class="btn" onclick = "register()">注册</button></li>
+					</ul>
+				</form>
+            </div>
+        </div>
+		<div class="animated-fadein right active"></div>
+        <!-- login end -->
+    </div>
+
+<!-- wrapper end -->
+
+<script src="js/jquery.js"></script>
+<script src="js/diquick.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/md5.js"></script>
+<script>
+	function register(){
+		
+		if(document.getElementById("nameId").value == ""){
+			alert("姓名不能为空！")
+		}else if(document.getElementById("numberId").value == ""){
+			alert("学号不能为空！")
+		}else if(document.getElementById("passId").value == ""){
+			alert("密码不能为空！")
+		}else if(document.getElementById("mailId").value == ""){
+			alert("邮箱不能为空！")
+		}else if (document.getElementById("passId").value !== document.getElementById("passAgaId").value){
+			alert("密码输入不正确")
+		}else if (document.getElementById("phoneId").value == ""){
+			alert("手机号不能为空！")
+		}else{
+			var pass = document.getElementById("passId").value;
+			document.getElementById("passId").value=hex_md5(pass);
+			document.getElementById("form2Id").submit();
+		}
+		}
+</script>
+</body>
+
+</html>

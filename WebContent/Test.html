@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>Dashboard - DiQuick</title>
+<meta name="keywords" content="前端框架,DiQuick,html,html5,css,css3,js,jquery,web">
+<meta name="description" content="DiQuick Web前端框架致力于快速开发轻量化、语义化、扩展性强的Web前端项目"> 
+
+<link rel="stylesheet" href="/css/diquick.css">
+
+<!-- fancybox -->
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css" media="screen">
+
+</head>
+
+<style>
+
+body {background-color:#f1f4f5;color:#333;}
+a,form {color:#333;}
+a:hover {color:#3f51b5;}
+
+.container {padding:2rem .75rem 0;width:100%;}
+
+@media screen and (min-width:750px) {.dialog {max-width:650px;min-width:450px;}}
+@media screen and (min-width:1200px) {.dialog {max-width:800px;min-width:600px;}}
+
+/*--button--*/
+.btn {background-color:#3f51b5;color:#fff;}
+.btn:hover {color:#fff;}
+
+/*--panel--*/
+.panel {border:0;border-radius:.375rem;}
+.panel>.title {background-color:#fff;color:#333;}
+.panel>.content {border-top:1px solid #f1f2f4;}
+.panel>.action {color:#333;}
+
+/*--page--*/
+ul.page li a {background-color:#f1f2f4;color:#333;}
+ul.page li a:hover,
+ul.page li.active a {background-color:#3f51b5;color:#fff;}
+
+/**--dropmenu--**/
+.dropmenu>span {color:#333;font-size:1rem;}
+.dropmenu ul {border-radius:.25rem;background-color:#222;}
+.dropmenu ul li a {padding-top:.375rem;padding-bottom:.375rem;color:#ccc;font-size:.925rem;}
+.dropmenu ul li a:hover,
+.dropmenu ul li.active a {background-color:#3f51b5;color:#fff;}
+
+/*--table--*/
+.table thead tr,
+.table thead tr th label {color:#333;}
+
+/**--top-nav--**/
+.top-nav {padding:1rem 2rem;background-color:#fff;box-shadow:0 0px 8px 0 rgba(0,0,0,0.06),0 1px 0px 0 rgba(0,0,0,0.02);}
+.top-nav .toggle-nav-btn {margin-top:.25rem;color:#999;font-size:1.5rem;cursor:pointer;}
+.top-nav .toggle-nav-btn:hover {color:#666;}
+.top-nav .dropmenu {margin:0;}
+.top-nav .dropmenu>span {font-weight:normal;}
+.top-nav:after {clear:both;display:table;content:"";line-height:0;}
+
+@media screen and (max-width:750px) {
+.top-nav {width:100%;}
+}
+
+/**--toggle-nav--**/
+.toggle-nav {background-color:#222;color:#fff;}
+
+.toggle-nav .menu.accordion>div {border-bottom:0;}
+.toggle-nav .menu.accordion>div:last-of-type {border-bottom:0;}
+.toggle-nav .menu.accordion>div>a {padding:.75rem 1rem;color:#ccc;font-size:1.125rem;}
+.toggle-nav .menu.accordion>div>a>i.arrow {background-position:-1px -28px;}
+
+.toggle-nav .menu.accordion>div>ul {background-color:#191919;}
+.toggle-nav .menu.accordion>div>ul>li>a {padding:.25rem 1rem;color:#ccc;font-size:.925rem;}
+.toggle-nav .menu.accordion>div>ul>li:hover>a,
+.toggle-nav .menu.accordion>div>ul>li.active>a {background-color:transparent;color:#fff;}
+
+.toggle-nav .menu.accordion>div:hover>a,
+.toggle-nav .menu.accordion>div.active>a {background-color:#191919;color:#fff;}
+
+.toggle-content.active {width:calc(100% - 20rem);}
+
+@media screen and (max-width:750px) {
+.toggle-content.active {width:100%;}
+}
+
+</style>
+
+<body>
+
+<!-- wrapper begin -->
+<div class="wrapper">
+
+    <!-- main begin -->
+    <div class="main">
+
+        <!-- top-nav begin -->
+        <div class="top-nav">
+            <i data-click="togglenavigation" class="toggle-nav-btn flaticon-four92"></i>
+            <div class="ib fr">
+                <div class="dropmenu right mr7">
+                    <span>Language:<small>English</small></span>
+                    <ul>
+                        <li><a href="#">English</a></li>
+                        <li><a href="#">Chinese</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn xs">Website</a>
+            </div>
+        </div>
+        <!-- top-nav end -->
+
+        <!-- container begin -->
+        <div class="container">
+        
+            <!-- panel begin -->
+            <div class="box100 plr">
+                <div class="panel">
+                    <div class="title">Slider</div>
+                    <div class="content">
+                        <!-- slider begin -->
+                        <ul class="box-advance list4 list-m2 list-s1 plr">
+                            <li>
+                                <div class="media zoom">
+                                    <span><a id="slider_img" href="../img/img1.jpg" data-fancybox-group="slider_img"><img src="../img/img1.jpg"></a></span>
+                                    <dl>
+                                        <dt>iPhone Cases</dt>
+                                        <dd>Keep your smartphone safe from bumps, bruises, drops, and more with our covers.</dd>
+                                        <dd>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="media zoom">
+                                    <span><a id="slider_img" href="../img/img2.jpg" data-fancybox-group="slider_img"><img src="../img/img2.jpg"></a></span>
+                                    <dl>
+                                        <dt>Business Cards</dt>
+                                        <dd>Browse all of our office essentials to keep you organized while showing off your individual style.</dd>
+                                        <dd>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="media zoom">
+                                    <span><a id="slider_img" href="../img/img1.jpg" data-fancybox-group="slider_img"><img src="../img/img1.jpg"></a></span>
+                                    <dl>
+                                        <dt>iPhone Cases</dt>
+                                        <dd>Keep your smartphone safe from bumps, bruises, drops, and more with our covers.</dd>
+                                        <dd>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="media zoom">
+                                    <span><a id="slider_img" href="../img/img2.jpg" data-fancybox-group="slider_img"><img src="../img/img2.jpg"></a></span>
+                                    <dl>
+                                        <dt>Business Cards</dt>
+                                        <dd>Browse all of our office essentials to keep you organized while showing off your individual style.</dd>
+                                        <dd>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- slider end -->
+                    </div>
+                </div>
+            </div>
+            <!-- panel end -->
+
+            <!-- panel begin -->
+            <div class="box100 plr">
+                <div class="panel">
+                    <div class="title">Order List</div>
+                    <div class="content">
+                    
+                        <button type="button" class="btn xs mb5 bg-333" data-click="mask" data-target="del_confirm">Batch delete</button>
+                        
+                        <form class="box-s100 ib fr">
+                            <ul class="form">
+                                <li><span>Search:</span><div><input name="search" type="text"></div></li>
+                                <li><button type="submit" class="btn xs">Search</button></li>
+                            </ul>
+                        </form>
+                        
+                        <!-- order begin -->
+                        <div class="table-scroll nowrap">
+                            <table class="table hover">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox">Order</th>
+                                        <th>Order Date</th>
+                                        <th>Product Information</th>
+                                        <th>Price</th>
+                                        <th>Username</th>
+                                        <th>Status</th>
+                                        <th>Operating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox">A012016032402</td>
+                                        <td>2016/3/24</td>
+                                        <td>This Dad Does Diapers, Cool Fathers Day New Dad Men's V-Neck T-Shirt</td>
+                                        <td>$338.39</td>
+                                        <td>Aaron</td>
+                                        <td>Unpaid</td>
+                                        <td>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox">A012016032402</td>
+                                        <td>2016/3/24</td>
+                                        <td>This Dad Does Diapers, Cool Fathers Day New Dad Men's V-Neck T-Shirt</td>
+                                        <td>$338.39</td>
+                                        <td>Cary</td>
+                                        <td>Unpaid</td>
+                                        <td>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox">A012016032402</td>
+                                        <td>2016/3/24</td>
+                                        <td>This Dad Does Diapers, Cool Fathers Day New Dad Men's V-Neck T-Shirt</td>
+                                        <td>$338.39</td>
+                                        <td>Evan</td>
+                                        <td>Unpaid</td>
+                                        <td>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox">A012016032402</td>
+                                        <td>2016/3/24</td>
+                                        <td>This Dad Does Diapers, Cool Fathers Day New Dad Men's V-Neck T-Shirt</td>
+                                        <td>$338.39</td>
+                                        <td>Justin</td>
+                                        <td>Unpaid</td>
+                                        <td>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox">A012016032402</td>
+                                        <td>2016/3/24</td>
+                                        <td>This Dad Does Diapers, Cool Fathers Day New Dad Men's V-Neck T-Shirt</td>
+                                        <td>$338.39</td>
+                                        <td>Lorin</td>
+                                        <td>Unpaid</td>
+                                        <td>
+                                            <button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs">Edit</button>
+                                            <button type="button" class="btn xs bg-333" data-click="mask" data-target="del_confirm">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- order end -->
+                        
+                        <p class="ib">Recordcount: 5</p>
+                        
+                        <ul class="page fr">
+                            <li class="disabled"><a href="#">Prev</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">Next</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <!-- panel end -->
+
+        </div>
+        <!-- container end -->
+        
+    </div>
+    <!-- main end -->
+    
+    <!-- hide box begin -->
+    <div id="edit_dialog" class="dialog hide">
+        <h6 class="tc mb5">Edit</h6>
+        <div class="msg error"><i class="flaticon-exclamation26"></i>Please enter the title.</div>
+        <form name="edit_content">
+            <ul class="form ratio100">       
+                <li><span>Title</span><div><input name="title" type="text"></div></li>
+                <li><span>Menu</span>
+                    <div>
+                        <select name="menu1">
+                            <option value="1">menu1</option>
+                        </select>
+                        <select name="menu2">	
+                            <option value="1">menu2</option>
+                        </select>
+                    </div>
+                </li>
+                <li><span>Content</span><div><textarea name="content"></textarea></div></li>
+                <li class="tc"><button type="button" class="btn">Submit</button></li>
+            </ul>
+        </form>
+    </div>
+    
+    <div id="del_confirm" class="mask">
+        <div class="content">
+            <p class="c-fff fs3">Please confirm that you want to delete this content.</p>
+            <button type="button" class="btn xs">Confirm</button>
+            <button type="button" class="btn xs" data-close="mask">Cancel</button>
+        </div>
+        <i data-close="mask" class="flaticon-cross89"></i>
+    </div>
+    <!-- hide box end -->
+    
+    <!-- toggle-nav begin -->
+    <div id="togglenavigation" class="toggle-nav relative active">
+        <div class="media tc">
+            <span class="box30 fc"><img src="../img/user.png" class="radius"></span>
+            <dl>
+                <dt>Username</dt>
+                <dd>Good morning!</dd>
+                <dd><a href="#" class="btn xs">Log Out</a></dd>
+            </dl>
+        </div>
+        <div class="menu accordion">
+            <div><a href="#"><i class="flaticon-gear31"></i>Dashboard</a></div>
+            <div class="active"><a href="#"><i class="flaticon-text130"></i>News</a>
+                <ul>
+                    <li><a href="#">Add News</a></li>
+                    <li class="active"><a href="#">News List</a></li>
+                </ul>
+            </div>
+            <div><a href="#"><i class="flaticon-menu48"></i>Menu</a>
+                <ul>
+                    <li><a href="#">Add Menu</a></li>
+                    <li><a href="#">Menu List</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- toggle-nav end -->
+
+</div>
+<!-- wrapper end -->
+
+<script src="/js/jquery.js"></script>
+<script src="/js/diquick.js"></script>
+<!-- fancybox -->
+<script src="/js/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="hidei"><script src="https://s11.cnzz.com/z_stat.php?id=1260550711&web_id=1260550711" language="JavaScript"></script></div>
+
+
+<script>
+$(function(){
+	
+	//toggle nav small
+	if ((document.body.clientWidth < 750)) {
+		$("[data-click='togglenavigation']").click();
+	}
+
+	//dialog
+	$("#edit_dialog_btn,#slider_img").fancybox({
+	});
+	
+});
+</script>
+
+</body>
+
+</html>

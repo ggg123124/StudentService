@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>Title</title>
+<meta name="keywords" content="Keywords">
+<meta name="description" content="Description"> 
+
+<link rel="stylesheet" href="css/diquick.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+
+</head>
+
+<style>
+
+div.background {padding:1.5rem;background-color:#ffffff;}
+
+div.background {padding:1.5rem;background-color:#fff;}
+
+/*--form--*/
+form {color:#555;}
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=number],
+input[type=tel],
+input[type=search],
+input[type=date],input[type=month],input[type=week],input[type=time],input[type=datetime],input[type=datetime-local],
+textarea,
+select {border-color:#bbb;border-radius:.375rem;background-color:#fff;color:#666;}
+label {color:#666;}
+label>p,
+ul.form>li>div>p {color:#999;}
+
+
+
+/*--login--*/
+.login {overflow:hidden;margin:8% auto 0 auto;max-width:450px;border-radius:.5rem;box-shadow:0 5px 25px 0 rgba(0, 0, 0, 0.16);}
+.login>.title {padding:1.5rem 0;background-color:#3f51b5;color:#fff;text-align:center;font-size:1.75rem;}
+.login>.content {padding:2rem;background-color:#fff;}
+
+</style>
+
+
+<body>
+
+<!-- wrapper begin -->
+<div class ="box100 plr">
+<div class = "panel">
+<div class="separator">实习单位管理<small>添加新的实习单位</small></div>
+<form id = "formId" action="saveOrg.jsp" method="post">
+    <ul class="form ratio100"> 
+        <li><span>单位名称</span><div><input type="text" name = "orgName" id = "orgNameId"></div></li>
+        <li><span>单位地址</span><div><input type="text" name = "address" id = "addressId"></div></li>
+        <li><span>联系人姓名</span><div><input type="text" name = "contacts" id = "contactsId"></div></li>
+        <li><span>联系方式</span><div><input type="text" name = "contactsPhone" id = "contactsPhoneId"></div></li>
+        <li><span>银行账户</span><div><input type="text" name = "account" id = "accountId"></div></li>
+        <li><span>再次输入银行账户</span><div><input type="text" name = "accountAga" id = "accountAgaId"></div></li>
+        <li><span>备注</span><div><textarea name = "remarks"></textarea></div></li>
+  
+        <li class="tc"><button type="button" class="btn" onclick = "save()">保存</button></li>
+    </ul>
+</form>
+</div>
+</div>
+<!-- wrapper end -->
+
+<script src="js/jquery.js"></script>
+<script src="js/diquick.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script>
+	function save(){
+		var orgName = document.getElementById("orgNameId").value;
+		var address = document.getElementById("addressId").value;
+		var contacts = document.getElementById("contactsId").value;
+		var contactsPhone = document.getElementById("contactsPhoneId").value;
+		var account = document.getElementById("accountId").value;
+		var accountAga = document.getElementById("accountAgaId").value;
+		if(orgName == ""){
+			alert("请输入单位名称")
+		}else if(address == ""){
+			alert("请输入单位地址")
+		}else if(contacts == ""){
+			alert("请输入联系人姓名")
+		}else if (contactsPhone == ""){
+			alert("请输入联系人手机号")
+		}else if (account == ""){
+			alert("请输入银行账户")
+		}else if(accountAga == ""){
+			alert("请再次输入银行账户")
+		}else if (account != accountAga){
+			alert("两次输入的银行账户不正确")
+		}else{ 
+		document.getElementById("formId").submit();
+		}
+	}
+</script>
+
+
+</body>
+
+</html>
