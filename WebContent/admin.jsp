@@ -33,6 +33,7 @@
 .panel>.title {background-color:#fff;color:#333;}
 .panel>.content {border-top:1px solid #f1f2f4;}
 .panel>.action {color:#333;}
+.toggle-nav-btn{font-size: 2pc;text-align: left;}
 
 
 
@@ -46,12 +47,12 @@
 <!-- wrapper begin -->
 <div class="wrapper">
     <!-- header begin -->
-    <div class="header">
-        <div class="shell">
+    
+        
         <!-- 这个菜单按钮非常愚蠢，妈的劳资写的什么捷豹玩意儿？之后将其改为一个更小的并且绘制在侧边栏上的小三角形按钮 -->
-    	<input type="button" value="菜单" class="btn"  data-click="togglenavigation" style=" border:0px none">
-        </div>
-    </div>
+    	<i data-click="togglenavigation" class="toggle-nav-btn flaticon-four92"></i>
+       
+    
     <!-- header end -->
     <!-- main begin -->
     <div class="main">

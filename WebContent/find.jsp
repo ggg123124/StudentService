@@ -4,6 +4,8 @@
 <%@ page import="java.sql.*" %> 
 
 <% 
+	String keyward =new String((request.getParameter("keyward")).getBytes("ISO-8859-1"),"UTF-8");
+
 	//驱动程序名 
 	String driverName="com.mysql.jdbc.Driver"; 
 	//数据库用户名 
@@ -20,7 +22,7 @@
 	Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 	Connection connection=DriverManager.getConnection(url); 
 	Statement statement = connection.createStatement(); 
-	String sql1 = "SELECT * FROM "+tableName;
+	String sql1 = "SELECT * FROM "+tableName+" WHERE org_name LIKE  "+"'%"+keyward+"%'";
 	ResultSet rs1 = statement.executeQuery(sql1);
 	rs1.last();
 	int length = rs1.getRow();
@@ -31,6 +33,7 @@
 	rs1.absolute(12*id+1);
 	ResultSet rs = statement.executeQuery(sql1);
 	int a;
+	
 	
 %>
 <!DOCTYPE html>
@@ -67,7 +70,7 @@
                         
                         <form class="box-s100 ib fr" action = "find.jsp?id=1" method="post" id="formId">
                             <ul class="form" >
-                                <li><span>查询:</span><div><input  type="text" name = "keyward"></div></li>
+                                <li><span>查询:</span><div><input type="text" name = "keyward"></div></li>
                                 <li><button type="submit" class="btn xs">查询</button></li>
                             </ul>
                         </form>
@@ -88,18 +91,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <%while(rs.next()&&rs.getRow()<=13*(id+1)){ 
+                                <%while(rs.next()/*&&rs.getRow()<=13*(id+1)*/){ 
                                 	String string = rs.getString("account");
-                                	a=rs.getRow()-1;%>
+                                	/*a=rs.getRow()-1;*/%>
                                     <tr>
                                         
-                                        <td id=<%=rs.getString("id")%>><form  action = "Delete.jsp" method="post" id="deleteformId" >
-                                        										<input type="checkbox" name = "answer" value = "<%=rs.getString("id") %>"><%=rs.getString("org_name") %></form></td>
-            							<td id=<%="address"+a%>><%=rs.getString("address") %></td>
-           								<td id=<%="contacts"+a%>><%=rs.getString("contacts") %></td>
-            							<td id=<%="contacts_phone"+a%>><%=rs.getString("contacts_phone") %></td>
-            							<td id=<%="account"+a%>><%=rs.getString("account") %></td>
-            							<td id=<%="remarks"+a%>><%=rs.getString("remarks") %></td>           							
+                                        <td id=<%=rs.getString("id")%>><input type="checkbox" id = "<%=rs.getString("remarks")%>"><%=rs.getString("org_name") %></td>
+            							<td id=<%="address"+rs.getString("id")%>><%=rs.getString("address") %></td>
+           								<td id=<%="contacts"+rs.getString("id")%>><%=rs.getString("contacts") %></td>
+            							<td id=<%="contacts_phone"+rs.getString("id")%>><%=rs.getString("contacts_phone") %></td>
+            							<td id=<%="account"+rs.getString("id")%>><%=rs.getString("account") %></td>
+            							<td id=<%="remarks"+rs.getString("id")%>><%=rs.getString("remarks") %></td>           							
                                       <!--   <td><button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs" >修改</button>--> 
 
 										<td>
@@ -120,7 +122,7 @@
                         
                         <ul class="page fr">
                             <li class="disabled"><a href="#">Prev</a></li>
-                            <li class="active"><%for(a = 0;a<=page2;a++){%><li><a href="manageOrg.jsp?id=<%=a+1 %>" id = "<%=a+1 %>"><%=a+1 %></a></li><%} %>
+                            <li class="active"><%for(a = 0;a<=page2;a++){%><li><a href="manageOrg.jsp?id=<%=a+1%>" id = "<%=a+1%>"><%=a+1%></a></li><%} %>
                             
                             <li><a href="#">Next</a></li>
                         </ul>
@@ -149,7 +151,7 @@
     <div id="del_confirm" class="mask">
         <div class="content">
             <p class="c-fff fs3">Please confirm that you want to delete this content.</p>
-            <button type="button" class="btn xs" onclick = "checkData()">Confirm</button>
+            <button type="button" class="btn xs">Confirm</button>
             <button type="button" class="btn xs" data-close="mask">Cancel</button>
         </div>
         <i data-close="mask" class="flaticon-cross89"></i>
@@ -176,15 +178,9 @@ function modify(string id){
 	
 }--> 
 <script type="text/javascript">
-function submit(){
-	document.getElementById("deleteformId").submit();
+function find(){
+	document.getElementById("formId").submit();
 }
-function checkData(){ 
-	 
-	 document.getElementById("deleteformId").submit();
-	}
-	
-	
 $(function(){
 	
 	//toggle nav small

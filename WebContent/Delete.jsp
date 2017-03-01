@@ -2,7 +2,15 @@
 <%@ page language="java" %> 
 <%@ page import="com.mysql.jdbc.Driver" %> 
 <%@ page import="java.sql.*" %> 
-
+<% 
+    if(!session.getAttribute("type").equals("admin")){
+    	response.sendRedirect("diquick.jsp");
+    	return;
+    }
+    if(!session.getAttribute("login").equals("ok")){
+    	response.sendRedirect("diquick.jsp");
+    }
+     %>
 <% 
 	//驱动程序名 
 	String driverName="com.mysql.jdbc.Driver"; 
@@ -17,14 +25,13 @@
 	//联结字符串 
 	String url="jdbc:mysql://localhost/"+dbName+"?useUnicode=true&characterEncoding=utf-8&user="+userName+"&password="+userPasswd; 
 
-	String name =new String((request.getParameter("name")).getBytes("ISO-8859-1"),"UTF-8");	
 	
-	String column = request.getParameter("column");
+	String id = request.getParameter("id");
 
 	Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 	Connection connection=DriverManager.getConnection(url); 
 	Statement statement = connection.createStatement(); 
-	String sql1 = "DELETE  FROM "+tableName+" WHERE "+column+"="+"'"+name+"'";
+	String sql1 = "DELETE  FROM "+tableName+" WHERE id="+id;
 	System.out.println(sql1);
 	statement.executeUpdate(sql1);
 	
