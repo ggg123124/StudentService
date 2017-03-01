@@ -15,14 +15,14 @@
 	//数据库名 
 	String dbName="student_sys"; 
 	//表名 
-	String tableName="organization"; 
+	String tableName="teacher"; 
 	//联结字符串 
 	String url="jdbc:mysql://localhost/"+dbName+"?useUnicode=true&characterEncoding=utf-8&user="+userName+"&password="+userPasswd; 
 	
 	Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 	Connection connection=DriverManager.getConnection(url); 
 	Statement statement = connection.createStatement(); 
-	String sql1 = "SELECT * FROM "+tableName+" WHERE org_name  LIKE "+"'%"+keyward+"%' OR address LIKE "+"'%"+keyward+"%' OR contacts LIKE "+"'%"+keyward+"%' OR contacts_phone LIKE "+"'%"+keyward+"%' OR account LIKE "+"'%"+keyward+"%' OR remarks LIKE "+"'%"+keyward+"%'";
+	String sql1 = "SELECT * FROM "+tableName+" WHERE teacher_name  LIKE "+"'%"+keyward+"%' OR teacher_number LIKE "+"'%"+keyward+"%' OR teacher_mail LIKE "+"'%"+keyward+"%' OR teacher_phone_number LIKE "+"'%"+keyward+"%'";
 	System.out.println(sql1);
 	ResultSet rs1 = statement.executeQuery(sql1);
 	rs1.last();
@@ -69,7 +69,7 @@
                     
                         <button type="button" class="btn xs mb5 bg-333" data-click="mask" data-target="del_confirm">删除选中</button>
                         
-                        <form class="box-s100 ib fr" action = "find.jsp?id=1" method="post" id="formId">
+                        <form class="box-s100 ib fr" action = "teacherFind.jsp?id=1" method="post" id="formId">
                             <ul class="form" >
                                 <li><span>查询:</span><div><input type="text" name = "keyward"></div></li>
                                 <li><button type="submit" class="btn xs">查询</button></li>
@@ -82,27 +82,24 @@
                                 <thead>
                                     <tr>
                                      
-                                     <th>单位名称</th>
-            						 <th>单位地址</th>
-           					 		 <th>联系人</th>
-           				 			 <th>联系电话</th>
-           							 <th>银行账户</th>
-           							 <th>备注</th>
+                                     <th>教师姓名</th>
+            						 <th>教师工号</th>
+           					 		 <th>教师邮箱</th>
+           				 			 <th>联系电话</th>       							 
            							 <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <%while(rs.next()/*&&rs.getRow()<=13*(id+1)*/){ 
-                                	String string = rs.getString("account");
+                                	//String string = rs.getString("account");
                                 	/*a=rs.getRow()-1;*/%>
                                     <tr>
                                         
-                                        <td id=<%=rs.getString("id")%>><input type="checkbox" id = "<%=rs.getString("remarks")%>"><%=rs.getString("org_name") %></td>
-            							<td id=<%="address"+rs.getString("id")%>><%=rs.getString("address") %></td>
-           								<td id=<%="contacts"+rs.getString("id")%>><%=rs.getString("contacts") %></td>
-            							<td id=<%="contacts_phone"+rs.getString("id")%>><%=rs.getString("contacts_phone") %></td>
-            							<td id=<%="account"+rs.getString("id")%>><%=rs.getString("account") %></td>
-            							<td id=<%="remarks"+rs.getString("id")%>><%=rs.getString("remarks") %></td>           							
+                                        <td id=<%=rs.getString("id")%>><input type="checkbox" name = "check" value = "<%=rs.getString("id") %>"><%=rs.getString("teacher_name") %></td>
+            							<td id=<%="address"+rs.getString("id")%>><%=rs.getString("teacher_number") %></td>
+           								<td id=<%="contacts"+rs.getString("id")%>><%=rs.getString("teacher_mail") %></td>
+            							<td id=<%="contacts_phone"+rs.getString("id")%>><%=rs.getString("teacher_phone_number") %></td>
+            							          							
                                       <!--   <td><button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs" >修改</button>--> 
 
 										<td>
@@ -152,7 +149,7 @@
     <div id="del_confirm" class="mask">
         <div class="content">
             <p class="c-fff fs3">Please confirm that you want to delete this content.</p>
-            <button type="button" class="btn xs">Confirm</button>
+            <button type="button" class="btn xs" onclick = "checkData()">Confirm</button>
             <button type="button" class="btn xs" data-close="mask">Cancel</button>
         </div>
         <i data-close="mask" class="flaticon-cross89"></i>
@@ -192,6 +189,11 @@ function checkData(){
 			document.getElementById("a").value += arr[i].value+",";
 		}
 	}
+	
+	
+	document.getElementById("deleteformId").submit();
+}	
+	
 function find(){
 	document.getElementById("formId").submit();
 }

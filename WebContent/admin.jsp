@@ -80,10 +80,18 @@
                 <li><a href="manageOrg.jsp?id=1" target = "iframetab">管理现有实习单位</a></li>
             </ul>
         </div>
+         <div><a>实习任务管理</a>
+            <ul>
+                <li><a href="#" target = "iframetab">添加新的实习任务</a></li>
+                <li><a href="#"  target = "iframetab">管理现有实习任务</a></li>
+                
+                <!-- TODO -->
+            </ul>
+        </div>
         <div><a>教师管理</a>
             <ul>
                 <li><a href="addTeacher.html" target = "iframetab">添加新的教师账号</a></li>
-                <li><a href="#">管理现有的教师账号</a></li>
+                <li><a href="manageTeacher.jsp?id=1"  target = "iframetab">管理现有的教师账号</a></li>
                 <li><a href="#">教师实习任务分配</a></li>
                 <!-- TODO -->
             </ul>

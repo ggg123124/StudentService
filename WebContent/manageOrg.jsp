@@ -88,13 +88,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                              
                                 <%while(rs.next()&&rs.getRow()<=13*(id+1)){ 
                                 	String string = rs.getString("account");
                                 	a=rs.getRow()-1;%>
                                     <tr>
                                         
-                                        <td id=<%=rs.getString("id")%>><form  action = "Delete.jsp" method="post" id="deleteformId" >
-                                        										<input type="checkbox" name = "answer" value = "<%=rs.getString("id") %>"><%=rs.getString("org_name") %></form></td>
+                                        <td id=<%=rs.getString("id")%>>
+                                        			<input type="checkbox" name = "check" value = "<%=rs.getString("id") %>">
+                                        			<input type="hidden" name = "tab" value = "organization"/>					
+                                        <%=rs.getString("org_name") %></td>
+                     
             							<td id=<%="address"+a%>><%=rs.getString("address") %></td>
            								<td id=<%="contacts"+a%>><%=rs.getString("contacts") %></td>
             							<td id=<%="contacts_phone"+a%>><%=rs.getString("contacts_phone") %></td>
@@ -103,11 +107,12 @@
                                       <!--   <td><button id="edit_dialog_btn" href="#edit_dialog" type="button" class="btn xs" >修改</button>--> 
 
 										<td>
-                                        <a class="btn xs bg-333"href="Delete.jsp?tab=organization&id=<%=rs.getString("id") %>">删除</a>
+                                        <a class="btn xs bg-333"href="Delete.jsp?tab=organization&check=<%=rs.getString("id") %>">删除</a>
 
                                         </td>
                                     </tr>
                                 <%} 
+                                
       		
 								statement.close(); 
 								connection.close(); %>
@@ -154,6 +159,12 @@
         </div>
         <i data-close="mask" class="flaticon-cross89"></i>
     </div>
+    <div id="hidden" align="center" style="display:'none'">
+	<form id="deleteformId"  action = "Delete.jsp" method="post">
+	<input type="hidden" id="a" name = "check"/>
+	<input type="hidden" name = "tab" value = "organization"/>	
+	</form>
+	</div>
 
             
             <!-- panel end -->
@@ -176,13 +187,18 @@ function modify(string id){
 	
 }--> 
 <script type="text/javascript">
-function submit(){
-	document.getElementById("deleteformId").submit();
-}
+
 function checkData(){ 
-	 
-	 document.getElementById("deleteformId").submit();
+	var arr=document.getElementsByName("check");
+	for(i=0;i<arr.length;i++){
+		if(arr[i].checked){
+			document.getElementById("a").value += arr[i].value+",";
+		}
 	}
+	
+	
+	document.getElementById("deleteformId").submit();
+}	
 	
 	
 $(function(){

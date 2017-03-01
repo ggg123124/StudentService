@@ -2,6 +2,8 @@
 <%@ page language="java" %> 
 <%@ page import="com.mysql.jdbc.Driver" %> 
 <%@ page import="java.sql.*" %> 
+<%@ page import="java.util.regex.*" %> 
+<%@ page import="java.math.*" %> 
 <% 
     if(!session.getAttribute("type").equals("admin")){
     	response.sendRedirect("diquick.jsp");
@@ -26,14 +28,27 @@
 	String url="jdbc:mysql://localhost/"+dbName+"?useUnicode=true&characterEncoding=utf-8&user="+userName+"&password="+userPasswd; 
 
 	
-	String id = request.getParameter("id");
+	String id = request.getParameter("check");
+	
+	System.out.println(id);
+	String regex = "\\d*";
+	Pattern p = Pattern.compile(regex);
 
+	Matcher m = p.matcher(id);
+	
 	Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 	Connection connection=DriverManager.getConnection(url); 
 	Statement statement = connection.createStatement(); 
-	String sql1 = "DELETE  FROM "+tableName+" WHERE id="+id;
+
+	while (m.find()) {
+	if (!"".equals(m.group())){
+    String sql1 = "DELETE  FROM "+tableName+" WHERE id="+m.group();
 	System.out.println(sql1);
-	statement.executeUpdate(sql1);
+	statement.executeUpdate(sql1);}
+	}
+
+	
+	
 	
 
 
